@@ -72,6 +72,10 @@ public:
     void    scl( K  a );
 };
 
+template <typename K>
+Vector<K>   linear_combination(const std::vector<Vector<K>>   &vecs, const std::vector<K>    &coefs);
+
 # include <Vector.ipp>
+
 
 #endif

@@ -43,7 +43,6 @@ public:
     OPERATORS
     */
     Vector<K>   &operator=(Vector<K> const &rhs);
-
     friend std::ostream&    operator<< <>( std::ostream& os, const Vector<K>& v );
     
     K&          operator[]( size_t i );
@@ -67,11 +66,16 @@ public:
     /*
     OPERATION
     */
-    void    add( Vector<K>  &v );
-    void    sub( Vector<K>  &v );
-    void    scl( K  a );
+    void    add( const Vector<K>  &v );
+    void    sub( const Vector<K>  &v );
+    void    scl( const K  a );
+    K       dot( const Vector<K> &v );
 };
 
+template <typename K>
+Vector<K>   linear_combination(const std::vector<Vector<K>>   &vecs, const std::vector<K>    &coefs);
+
 # include <Vector.ipp>
+
 
 #endif
