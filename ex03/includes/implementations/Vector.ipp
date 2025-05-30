@@ -243,5 +243,7 @@ Vector<K>   linear_combination(const std::vector<Vector<K>>   &vecs, const std::
 template <typename V>
 V   lerp(const V    u, const V  v, const float  t)
 {
+    if constexpr (std::is_arithmetic_v<V>)
+        return std::fma(u, (1 - t), (v * t));
     return (u * (1 - t)) + (v * t);
 }

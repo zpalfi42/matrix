@@ -16,7 +16,7 @@ SRC     =  main.cpp  \
 OBJ     =  $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
 CC       =  g++
-CFLAGS     =  -Wall -Wextra -Werror -std=c++11
+CFLAGS     =  -Wall -Wextra -Werror
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp $(HDRS) $(IMPS) Makefile
 	@mkdir -p $(OBJ_DIR)

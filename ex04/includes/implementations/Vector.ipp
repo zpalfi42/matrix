@@ -182,7 +182,7 @@ OPERATIONS
 */
 
 template <typename K>
-void    Vector<K>::add( Vector<K>  &v )
+void    Vector<K>::add( const Vector<K>  &v )
 {
     if (this->_data.size() != v.size())
         throw std::runtime_error("Could not compute sum of two vectors: Vectors are not the same size.");
@@ -192,7 +192,7 @@ void    Vector<K>::add( Vector<K>  &v )
 };
 
 template <typename K>
-void    Vector<K>::sub( Vector<K>  &v )
+void    Vector<K>::sub( const Vector<K>  &v )
 {
     if (this->_data.size() != v.size())
         throw std::runtime_error("Could not compute sum of two vectors: Vectors are not the same size.");
@@ -202,10 +202,66 @@ void    Vector<K>::sub( Vector<K>  &v )
 }
 
 template <typename K>
-void    Vector<K>::scl( K  a )
+void    Vector<K>::scl( const K  a )
 {
     for (size_t i = 0; i < this->_data.size(); i++)
         this->_data[i] *= a;    
+}
+
+template <typename K>
+K   Vector<K>::dot( const Vector<K> &v )
+{
+    if (this->size() != v.size())
+        throw std::runtime_error("Could not compute dot of two vectors: Vectors are not the same size.");
+
+    K   res = this->_data[0] * v[0];
+
+    for (size_t i = 1; i < this->size(); i++)
+        res += this->_data[i] * v[i];
+
+    return res;
+}
+
+template <typename K>
+float   Vector<K>::norm_1( void )
+{
+    if (this->size() == 0)
+        throw   std::runtime_error("Could not compute norm_1 of vector: Vector empty");
+    
+    float res = 0;
+
+    for (size_t i = 0; i < this->size(); i++)
+        res = std::fma(this->_data[i], (this->_data[i] < 0) ? -1 : 1, res);
+    
+    return res;
+}
+
+template <typename K>
+float   Vector<K>::norm( void )
+{
+    if (this->size() == 0)
+        throw   std::runtime_error("Could not compute norm of vector: Vector empty");
+
+    float res = 0;
+
+    for (size_t i = 0; i < this->size(); i++)
+        res = std::fma(this->_data[i], this->_data[i], res);
+    
+    return pow(res, 0.5f);
+}
+
+template <typename K>
+float   Vector<K>::norm_inf( void )
+{
+    if (this->size() == 0)
+        throw   std::runtime_error("Could not compute norm_inf of vector: Vector empty");
+        
+    float res = this->_data[0];
+
+    for (size_t i = 1; i < this->size(); i++)
+        res = std::max(res, this->_data[i] * (this->_data[i] < 0 ? -1 : 1));
+    
+    return res;
 }
 
 template <typename K>

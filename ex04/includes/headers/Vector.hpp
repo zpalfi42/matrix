@@ -67,9 +67,13 @@ public:
     /*
     OPERATION
     */
-    void    add( Vector<K>  &v );
-    void    sub( Vector<K>  &v );
-    void    scl( K  a );
+    void    add( const Vector<K>  &v );
+    void    sub( const Vector<K>  &v );
+    void    scl( const K  a );
+    K       dot( const Vector<K> &v );
+    float   norm_1( void );
+    float   norm( void );
+    float   norm_inf( void );
 };
 
 template <typename K>

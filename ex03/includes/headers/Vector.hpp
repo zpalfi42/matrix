@@ -3,6 +3,7 @@
 
 # include <vector>
 # include <iostream>
+# include <cmath>
 
 template <typename K>
 class Matrix;
